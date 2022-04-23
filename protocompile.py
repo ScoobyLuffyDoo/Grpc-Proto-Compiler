@@ -11,19 +11,21 @@ class Trc:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
+prompt ='> '
 compileCalled =False
 protoFolderFound = False
 protoFileFound = False
 outputFolderFound = False
 
-projectDir = input(f'{Trc.HEADER}Paste Projects Complete Directory\n{Trc.ENDC}')
+print(f'{Trc.HEADER}Paste Projects Complete Directory{Trc.ENDC}')
+projectDir = input(prompt)
+
 os.chdir(r"{}".format(projectDir))
-print(os.getcwd())
 while compileCalled == False:
     # Get User Input To Generating client and server code
     while protoFolderFound == False:
-        folderLocation = input(f"{Trc.OKGREEN}In what Folder dir is the proto file located?\n{Trc.ENDC}")
+        print(f"{Trc.OKGREEN}In what Folder dir is the proto file located?{Trc.ENDC}")
+        folderLocation = input(prompt)
         pathExists = os.path.exists(folderLocation) 
         if pathExists ==False:
             print(f"{Trc.FAIL}\n==> Folder Does Not Exist !!\n{Trc.ENDC}")
@@ -33,7 +35,8 @@ while compileCalled == False:
         else:
             protoFolderFound =True
     while protoFileFound == False:
-        fileName = input(f"{Trc.OKGREEN}What is your Proto file name ?\n{Trc.ENDC}").removesuffix('.proto')
+        print(f"{Trc.OKGREEN}What is your Proto file name ?{Trc.ENDC}")
+        fileName = input(prompt).removesuffix('.proto')
         filepath =f'./{folderLocation}/{fileName}.proto'
         fileExists = os.path.exists(filepath)
         if fileExists == False:
@@ -44,7 +47,8 @@ while compileCalled == False:
         else:
             protoFileFound =True
     while outputFolderFound == False:
-        outputfolder = input(f"{Trc.OKGREEN}Folder name for Generating client and server code ?\n{Trc.ENDC}")   
+        print(f"{Trc.OKGREEN}Folder name for Generating client and server code ?{Trc.ENDC}")   
+        outputfolder = input(prompt)   
         outputhFolderExists = os.path.exists(outputfolder) 
         if outputhFolderExists ==False:
             print(f"{Trc.FAIL}\n==> Folder Does Not Exist and will be Created !!\n{Trc.ENDC}")
